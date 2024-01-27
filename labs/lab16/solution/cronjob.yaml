@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: test-cron-job
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    metadata:
+      name: test-job
+    spec:
+      template:
+        spec:
+          containers:
+            - name: test
+              image: alpine:latest
+              command:
+                - "bin/sh"
+                - "-c"
+                - "for i in 1 2 3 4 5 6 7 8 9 ; do echo $i ; done"
+          restartPolicy: Never
